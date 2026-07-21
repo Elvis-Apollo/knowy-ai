@@ -34,7 +34,7 @@ Optional OpenAI integration:
 
 ```bash
 OPENAI_API_KEY=your_key
-OPENAI_MODEL=gpt-5.2
+OPENAI_MODEL=gpt-5.6
 ```
 
 The GitHub connector works anonymously with public repositories. Customize it in `.env.local`:
