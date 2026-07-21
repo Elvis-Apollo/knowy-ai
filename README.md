@@ -6,6 +6,40 @@ Knowy is a small, hackathon-ready company intelligence layer. It retrieves a foc
 
 Four included topics—Acme deployment, OAuth migration, enterprise pricing, and the Atlas incident—work without external credentials. Knowy also includes a real GitHub connector that retrieves current issues from `openai/openai-node` by default. Question terms are matched and ranked against normalized source records before evidence is retrieved. An optional OpenAI Responses API path generates the same structured intelligence contract when `OPENAI_API_KEY` is configured.
 
+## Built with Codex and GPT-5.6
+
+### How Codex was used
+
+Codex was the development collaborator for the majority of this project. Starting from the product concept, it helped turn the idea into a working hackathon MVP by:
+
+- defining the smallest credible architecture and implementation scope;
+- scaffolding the Next.js and TypeScript application;
+- implementing the query, retrieval, persistence, freshness, and refresh flows;
+- creating realistic Slack, GitHub, and Google Drive demo records;
+- adding the live GitHub connector and OpenAI Responses API integration;
+- debugging stale-answer refreshes, response parsing, formatting, and loading feedback;
+- running lint and build validation; and
+- preparing the README, reversible snapshots, and GitHub-ready project.
+
+The primary Codex session ID is:
+
+```text
+019f821e-4610-73a0-9ee7-f5baa34f8f33
+```
+
+### How GPT-5.6 is used
+
+GPT-5.6 is Knowy's runtime intelligence generator. After deterministic retrieval selects a small, relevant evidence set, Knowy sends the user's question plus source IDs, source versions, timestamps, and excerpts to the OpenAI Responses API. GPT-5.6 then returns a strict structured object containing:
+
+- a concise evidence-grounded answer;
+- findings mapped to their supporting source IDs;
+- confidence and status fields; and
+- an updated synthesis when a source dependency changes.
+
+GPT-5.6 is instructed to use only supplied evidence, prefer newer source versions when facts conflict, identify resolved blockers, and avoid unsupported conclusions. The model does not search the whole company or decide freshness by itself: retrieval, version comparison, reuse, persistence, and stale-object refresh are controlled by application code. A deterministic fallback keeps the demonstration usable when no OpenAI key is configured.
+
+The active model is configured with `OPENAI_MODEL=gpt-5.6`.
+
 ## What the demo proves
 
 1. Ask **“Why is the Acme deployment delayed?”**
